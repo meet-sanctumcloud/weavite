@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   # 1. The Weaviate Vector Database Service
   weaviate:
@@ -11,15 +11,15 @@ services:
       - "50051:50051"
     environment:
       # Weaviate's connection scheme/port (Coolify handles the internal networking)
-      HOST: '0.0.0.0'
-      PORT: '8080'
-      SCHEME: 'http'
+      HOST: "0.0.0.0"
+      PORT: "8080"
+      SCHEME: "http"
       # To run Weaviate without API Key authentication (for quick start)
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
       # Recommended to enable a vectorizer module (e.g., text2vec-openai or text2vec-cohere)
       # For this simple setup, we use 'none' which means you'll need to provide vectors yourself
-      DEFAULT_VECTORIZER_MODULE: 'none'
-      ENABLE_MODULES: '' 
+      DEFAULT_VECTORIZER_MODULE: "none"
+      ENABLE_MODULES: ""
       # You can add a volume for data persistence:
     volumes:
       - weaviate_data:/var/lib/weaviate
@@ -29,13 +29,10 @@ services:
   weaviate-console:
     # Official Weaviate Console Docker Image
     image: semitechnologies/weaviate-console:latest
-    # The UI will be accessible on port 80
-    ports:
-      - "80:80"
     environment:
       # The UI needs to know the address of the Weaviate service.
       # Since they are in the same docker-compose file, 'weaviate:8080' works!
-      WEAVIATE_URL: 'http://weaviate:8080'
+      WEAVIATE_URL: "http://weaviate:8080"
     restart: always
 
 # Define the volume for persistent data storage
